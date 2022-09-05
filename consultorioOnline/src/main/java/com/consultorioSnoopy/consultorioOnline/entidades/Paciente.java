@@ -14,35 +14,43 @@ import javax.persistence.Id;
  *
  * @author yonathanp
  */
-@Entity(name="paciente")
+@Entity(name="pacientes")
 public class Paciente {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(name="nombre_completo", length = 45, nullable = true)
-    private String nombre_completo;
+    @Column(name="nombre_completo", length = 45, nullable = false, unique = false)
+    private String nombreCompleto;
     
-    @Column(name="tipo_documento", length = 5, nullable = true)
-    private String tipo_documento;
+    @Column(name="tipo_documento", length = 5, nullable = false, unique = false)
+    private String tipoDocumento;
     
-    @Column(name="numero_documento", nullable = true)
-    private String numero_documento;
+    @Column(name="numero_documento", nullable = false, unique = true)
+    private int numeroDocumento;
     
-    @Column(name="clave",  length = 45, nullable = true)
+    @Column(name="clave",  length = 45, nullable = false, unique = false)
     private String clave;
     
-    @Column(name="habilitado", nullable=true)
+    @Column(name="habilitado", nullable=true, unique = false, columnDefinition = "TINYINT")
     private boolean habilitado; //vale como habeas data
     
     public Paciente() {
     }
 
-    public Paciente(String nombre_completo, String tipo_documento, String numero_documento, String clave) {
-        this.nombre_completo = nombre_completo;
-        this.tipo_documento = tipo_documento;
-        this.numero_documento = numero_documento;
+    public Paciente(int id, String nombreCompleto, String tipoDocumento, int numeroDocumento, String clave) {
+        this.id = id;
+        this.nombreCompleto = nombreCompleto;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+        this.clave = clave;
+    }
+
+    public Paciente(String nombreCompleto, String tipoDocumento, int numeroDocumento, String clave) {
+        this.nombreCompleto = nombreCompleto;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
         this.clave = clave;
         habilitado=true;
     }
@@ -51,28 +59,32 @@ public class Paciente {
         return id;
     }
 
-    public String getNombre_completo() {
-        return nombre_completo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setNombre_completo(String nombre_completo) {
-        this.nombre_completo = nombre_completo;
+    public String getNombreCompleto() {
+        return nombreCompleto;
     }
 
-    public String getTipo_documento() {
-        return tipo_documento;
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
     }
 
-    public void setTipo_documento(String tipo_documento) {
-        this.tipo_documento = tipo_documento;
+    public String getTipoDocumento() {
+        return tipoDocumento;
     }
 
-    public String getNumero_documento() {
-        return numero_documento;
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 
-    public void setNumero_documento(String numero_documento) {
-        this.numero_documento = numero_documento;
+    public int getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(int numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
     }
 
     public String getClave() {
@@ -93,7 +105,8 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "Paciente{" + "id=" + id + ", nombre_completo=" + nombre_completo + ", tipo_documento=" + tipo_documento + ", numero_documento=" + numero_documento + ", clave=" + clave + ", habilitado=" + habilitado + '}';
+        return "Paciente{" + "id=" + id + ", nombreCompleto=" + nombreCompleto + ", tipoDocumento=" + tipoDocumento + ", numeroDocumento=" + numeroDocumento + ", clave=" + clave + ", habilitado=" + habilitado + '}';
     }
-    
+      
+   
 }
