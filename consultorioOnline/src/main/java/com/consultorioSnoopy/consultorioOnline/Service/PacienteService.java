@@ -27,12 +27,7 @@ public class PacienteService {
     public Paciente consultaPacientesIdentificacion(int n){
         return repo.findBynumeroDocumento(n);
     }
-    
-/*    
-    public List<Paciente> consultaPacientesNombre(String n){
-        return repo.findBynombre_completoContaining(n);
-    } 
-  */  
+
     public Paciente consultaPacienteId(int n){
         return repo.findById(n).get();
     }
@@ -46,7 +41,7 @@ public class PacienteService {
         p.setHabilitado(true);
         return crearEditarPaciente(p).isHabilitado();
     }
-    
+     
     public List<Paciente> listaPacientesNombre (String criterio){
         return repo.findBynombreCompletoContaining(criterio);
     }
