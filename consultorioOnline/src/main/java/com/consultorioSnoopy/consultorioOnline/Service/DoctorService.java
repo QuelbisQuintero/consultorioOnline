@@ -16,39 +16,38 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DoctorService {
-    
+
     @Autowired
     private IDoctoresRepo repo;
-    
-    public Doctor crearEditarDoctor(Doctor d){
-        return repo.save(d);      
+
+    public Doctor crearEditarDoctor(Doctor d) {
+        return repo.save(d);
     }
 
-    public Doctor consultaDoctorId(int n){
+    public Doctor consultaDoctorId(int n) {
         return repo.findById(n).get();
     }
-    
-    public Doctor consultaDoctorIdentificacion(int n){
-        return repo.findBynumeroDocumento(n);
+
+    public Doctor consultaDoctorIdentificacion(int n) {
+        return repo.findByNumeroDocumentoIs(n);
     }
-    
-    public boolean deshabilitarDoctor(Doctor d){
+
+    public boolean deshabilitarDoctor(Doctor d) {
         d.setHabilitado(false);
         return crearEditarDoctor(d).isHabilitado();
     }
 
-    public boolean habilitarDoctor(Doctor d){
+    public boolean habilitarDoctor(Doctor d) {
         d.setHabilitado(true);
         return crearEditarDoctor(d).isHabilitado();
-    }    
-    
-    public List<Doctor> listaDoctoresNombre (String criterio){
-        return repo.findBynombreCompletoContaining(criterio);
     }
 
-    public List<Doctor> listaDoctores (){
+    public List<Doctor> listaDoctoresNombre(String criterio) {
+        return repo.findByNombreCompletoContaining(criterio);
+    }
+
+    public List<Doctor> listaDoctores() {
         return repo.findAll();
     }
-    
-    
+
 }

@@ -5,6 +5,7 @@
 package com.consultorioSnoopy.consultorioOnline.reposiorios;
 
 import com.consultorioSnoopy.consultorioOnline.entidades.Doctor;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +15,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IDoctoresRepo extends JpaRepository<Doctor, Integer>{
+    
+    public List <Doctor> findByNombreCompletoContaining(String criterio);
+    
+    public Doctor findByNumeroDocumentoIs (int a);
     
 }

@@ -21,7 +21,7 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(name="nombre_completo", length = 45, nullable = false, unique = false)
+    @Column(name="nombre_completo", length = 80, nullable = false, unique = false)
     private String nombreCompleto;
     
     @Column(name="tipo_documento", length = 5, nullable = false, unique = false)
@@ -30,7 +30,7 @@ public class Paciente {
     @Column(name="numero_documento", nullable = false, unique = true)
     private int numeroDocumento;
     
-    @Column(name="clave",  length = 45, nullable = false, unique = false)
+    @Column(name="clave",  length = 20, nullable = false, unique = false)
     private String clave;
     
     @Column(name="habilitado", nullable=true, unique = false, columnDefinition = "TINYINT")
