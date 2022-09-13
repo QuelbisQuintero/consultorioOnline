@@ -32,7 +32,7 @@ public class PacienteWebControler {
         return new ResponseEntity<> (pasientes, HttpStatus.OK);
     }
     
-    @GetMapping("api/pacientes/id")
+    @GetMapping("api/paciente")
     public ResponseEntity<Paciente> PacienteById(){
         Paciente paciente= pServisce.consultaPacienteId(47);
         return new ResponseEntity<> (paciente, HttpStatus.OK);

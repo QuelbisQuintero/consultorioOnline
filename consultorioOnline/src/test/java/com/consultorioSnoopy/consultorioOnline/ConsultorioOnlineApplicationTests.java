@@ -26,7 +26,7 @@ class ConsultorioOnlineApplicationTests {
         }
         //@Test
         void verificardeshabilitar(){
-            Paciente p = ps.consultaPacientesIdentificacion(56799);
+            Paciente p = ps.consultaPacientesIdentificacion(1234);
             Assertions.assertTrue(!ps.deshabilitarPaciente(p),"No se logro deshabilitar");            
         }
         //@Test
@@ -37,12 +37,12 @@ class ConsultorioOnlineApplicationTests {
             System.out.println(p);
             System.out.println(ps.crearEditarPaciente(p));
         }
-        @Test
+        //@Test
         void verificarListaPacientes(){
             System.out.println(ps.listaPacientes());
         }
         
-        @Test
+        //@Test
         void verificarListaPacientesNombre(){
             System.out.println(ps.listaPacientesNombre("pepe"));
         }
