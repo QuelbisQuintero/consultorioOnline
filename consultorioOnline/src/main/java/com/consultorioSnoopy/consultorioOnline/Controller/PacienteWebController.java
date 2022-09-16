@@ -20,21 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class PacienteWebControler {
+public class PacienteWebController {
     
     @Autowired
-    private PacienteService pServisce;
+    private PacienteService pService;
     
     
     @GetMapping("api/pacientes")
     public ResponseEntity<List<Paciente>> consultaPacientes(){
-        List<Paciente> pasientes= pServisce.listaPacientes();
+        List<Paciente> pasientes= pService.listaPacientes();
         return new ResponseEntity<> (pasientes, HttpStatus.OK);
     }
     
     @GetMapping("api/paciente")
     public ResponseEntity<Paciente> PacienteById(){
-        Paciente paciente= pServisce.consultaPacienteId(47);
+        Paciente paciente= pService.consultaPacienteId(47);
         return new ResponseEntity<> (paciente, HttpStatus.OK);
     }
     

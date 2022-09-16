@@ -4,8 +4,8 @@
  */
 package com.consultorioSnoopy.consultorioOnline.Controller;
 
-import com.consultorioSnoopy.consultorioOnline.Service.DoctorService;
-import com.consultorioSnoopy.consultorioOnline.entidades.Doctor;
+import com.consultorioSnoopy.consultorioOnline.Service.PacienteService;
+import com.consultorioSnoopy.consultorioOnline.entidades.Paciente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,63 +19,73 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author yonathanp
  * 
- * doctores           /doctores
- * doctor             /doctor
- * doctorForm         /doctor/form
- * doctorFormId       /doctor/form/{id}
- * doctorDes          /doctor/des/{id}
+ * index.html           /
+ * pacientes            /pacientes
+ * paciente             /paciente
+ * pacienteForm         /paciente/form
+ * pacienteFormId       /paciente/form/{id}
+ * pacienteDes          /paciente/des/{id}
  * 
  */
 
+
 @Controller
 public class PacienteController {
-        @Autowired
-        private DoctorService dService;
-        
-        @GetMapping ("/doctores")  // 
-        public String listaDoctores(Model model, @RequestParam(value="criterios", required=false) String criterio){
-            if(criterio==null){
-                model.addAttribute("doctores", dService.listaDoctores());
-            }else{
-                model.addAttribute("doctores", dService.listaDoctores());
-                model.addAttribute("criterio", criterio);
-            }
-            return "doctores";
+    
+    
+    @Autowired
+    private PacienteService pService;
+    
+    
+    @GetMapping("/")
+    public String cargarIndex(){
+        return "index";
+    }
+    
+    @GetMapping("/pacientes")
+    public String listaPacientes(Model model, @RequestParam(value="criterio", required=false) String criterio ){
+        if (criterio==null){
+            model.addAttribute("pacientes", pService.listaPacientes());          
+        }else{
+            model.addAttribute("pacientes", pService.listaPacientesNombre(criterio)); 
+            model.addAttribute("creiterio", criterio);
         }
+        return "pacientes";
+    }
         
-        @GetMapping("/doctor")
-        public String doctor(Model model, @PathVariable int id){
-            model.addAttribute("doctor", dService.consultaDoctorId(id) );
-            return "pasiente";
+    @GetMapping("/paciente")
+    public String Paciente(Model model, @RequestParam(value="id", required=true) int id){
+        model.addAttribute("paciente", pService.consultaPacienteId(id));
+        return "paciente";
+    }
+    
+    @GetMapping("/paciente/form")
+    public String formNewPaciente(Model model){
+        model.addAttribute("paciente", new Paciente() );
+        return "pacienteForm";
+    }
+    
+    @GetMapping("/paciente/form/{id}")
+    public String formNewPaciente(Model model, @PathVariable int id){
+        model.addAttribute("paciente", pService.consultaPacienteId(id) );
+        return "pacienteForm";
+    }
+    
+    @PostMapping("/pacientes")
+    public String guardarPaciente(@ModelAttribute Paciente p){
+        pService.crearEditarPaciente(p);
+        return "redirect:/pasientes";
+    }
+    
+    @GetMapping("/paciente/des/{id}")
+    public String deshabilitarPaciente(@PathVariable int id){
+        Paciente p = pService.consultaPacienteId(id);
+        if (p.isHabilitado()){
+            pService.deshabilitarPaciente(p);
+        }else{
+            pService.habilitarPaciente(p);
         }
-        
-        @GetMapping("/doctor/form")
-        public String formNewDoctor(Model model){
-            model.addAttribute("doctor", new Doctor() );
-            return "doctorForm";
-        }
-        
-        @GetMapping("/doctor/form/{id}")
-        public String formNewdoctor(Model model, @PathVariable int id){
-            model.addAttribute("doctor", dService.consultaDoctorId(id) );
-            return "doctorForm";
-        }   
-        
-        @PostMapping("/doctores")
-        public String guardarPaciente(@ModelAttribute Doctor d){
-            dService.crearEditarDoctor(d);
-            return "redirect:/doctores";
-        }
-        
-        @GetMapping("/doctor/des/{id}")
-        public String deshabilitarPaciente(@PathVariable int id){
-            Doctor d = dService.consultaDoctorId(id);
-            if (d.isHabilitado()){
-                dService.deshabilitarDoctor(d);
-            }else{
-                dService.habilitarDoctor(d);
-            }
-            return "redirect:/doctores";
-        }
-
+        return "redirect:/pasientes";
+    }
+    
 }
