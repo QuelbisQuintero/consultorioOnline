@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    </head>
+    <body>
+
+        <div class='container'>
+            <h1 class="text-center" >Listado de doctores</h1>
+
+            <form action="/doctores" method="get">
+                <label>Buscar por nombre:</label>
+                <input type="text" id="fnombre" name="fnombre" th:value='${fnombre}'>
+                <input type="submit" value="Filtrar">
+                <text class='text-danger'  th:if='${# lists.isEmpty(doctores)}'> No se encontro ninguna coincidencia </text>
+            </form>
+            <table class="table">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Tipo Documento</th>
+                        <th scope="col">Documento</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="doctor : ${doctores}">
+                        <th scope="row" th:text="${doctor.id}">...</th>
+                        <td th:text="${doctor.nombreCompleto}"></td>
+                        <td th:text="${doctor.tipoDocumento}"></td>
+                        <td th:text="${doctor.numeroDocumento}"></td>
+                        <td th:text="${doctor.telefono}"></td>
+                        <td class='row justify-content-md-center'>
+                            <a class="btn btn-secondary btn-lg active" th:href="${ '/doctor/form/'+ doctor.id}">Editar</a>
+                            <a class="btn btn-secondary btn-danger active" th:if='${doctor.habilitado}' th:href="${ '/doctor/des/'+ doctor.id}"> Deshabilitar</a>
+                            <a class="btn btn-secondary btn-lg active" th:unless='${doctor.habilitado}' th:href="${ '/doctor/des/'+ doctor.id}"> Habilitar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="/doctor/form" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Crear doctor</a>
+        </div>
+
+    </body>
+</html>

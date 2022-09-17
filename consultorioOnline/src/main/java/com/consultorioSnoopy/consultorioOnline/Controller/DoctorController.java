@@ -33,12 +33,12 @@ public class DoctorController {
         private DoctorService dService;
         
         @GetMapping ("/doctores")  // 
-        public String listaDoctores(Model model, @RequestParam(value="criterios", required=false) String criterio){
+        public String listaDoctores(Model model, @RequestParam(value="fnombre", required=false) String criterio){
             if(criterio==null){
                 model.addAttribute("doctores", dService.listaDoctores());
             }else{
-                model.addAttribute("doctores", dService.listaDoctores());
-                model.addAttribute("criterio", criterio);
+                model.addAttribute("doctores", dService.listaDoctoresNombre(criterio));
+                model.addAttribute("fnombre", criterio);
             }
             return "doctores";
         }
