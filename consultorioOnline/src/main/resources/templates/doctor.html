@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body bg-info>
+
+        <div class="container" >
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <h1 class="col text-center" th:inline="text"> Bienvenido doctor [[${doctor.nombreCompleto}]]</h1>
+                    <a href="/" class="btn btn-danger" role="button" data-bs-toggle="button">Salir</a>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="card col align-self-start" style="width: 18rem;">
+                    <div class="card-body">
+                      <h2 class="card-title">Informacion bacica</h2>
+                      <h6 class="card-title" th:inline="text"> Nombre completo: [[${doctor.nombreCompleto}]]</h6>
+                      <h6 class="card-title" th:inline="text"> Tipo documento: [[${doctor.tipoDocumento}]]</h6>
+                      <h6 class="card-title" th:inline="text"> Numero de documento: [[${doctor.numeroDocumento}]]</h6>
+                      <h6 class="card-title" th:inline="text"> Telefono: [[${doctor.telefono}]]</h6>
+                      <a th:href="${ '/doctor/form/'+ doctor.id}" class="card-link">Editar</a>
+
+                    </div>
+                </div>
+                <div class="col align-self-start">
+                    <h2>Opcions</h2>
+                    <div class="btn-group-vertical">
+                        <a href="/doctores" class="btn btn-primary active" aria-current="page">Lista de Doctores</a>
+                        <a href="#" th:if="${doctor.id==1}" class="btn btn-primary active" aria-current="page">Lista de Pacientes</a>
+                        <a href="#" class="btn btn-primary active" aria-current="page">Lista de Historiales Medicos</a>
+                        <a href="#" class="btn btn-primary active" aria-current="page">Agenda de citas</a>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </body>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</html>

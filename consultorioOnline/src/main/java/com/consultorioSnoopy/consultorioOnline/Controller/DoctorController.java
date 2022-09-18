@@ -32,7 +32,13 @@ public class DoctorController {
         @Autowired
         private DoctorService dService;
         
-        @GetMapping ("/doctores")  // 
+        @GetMapping("/")
+        public String cargarIndex(Model model){
+            model.addAttribute("doctor", new Doctor());
+            return "index";
+        }
+        
+        @GetMapping ("/doctores") 
         public String listaDoctores(Model model, @RequestParam(value="fnombre", required=false) String criterio){
             if(criterio==null){
                 model.addAttribute("doctores", dService.listaDoctores());
@@ -42,11 +48,23 @@ public class DoctorController {
             }
             return "doctores";
         }
-        
+  
         @GetMapping("/doctor")
-        public String doctor(Model model, @PathVariable int id){
-            model.addAttribute("doctor", dService.consultaDoctorId(id) );
-            return "pasiente";
+        public String doctor(Model model, @RequestParam(value="documento") int documento, @RequestParam(value="clave") String clave){
+            Doctor d = dService.consultaDoctorIdentificacion(documento);
+            if(d!=null){
+                if (d.getClave().equals(clave)){
+                   model.addAttribute("doctor", d);
+                   return "doctor";           
+                }else{
+                   model.addAttribute(clave);
+                   return "index";
+                }
+            }else{
+                   model.addAttribute(documento);
+                   return "index";
+            }
+
         }
         
         @GetMapping("/doctor/form")

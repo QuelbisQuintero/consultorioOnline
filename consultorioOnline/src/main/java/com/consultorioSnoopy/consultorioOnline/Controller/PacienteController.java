@@ -5,6 +5,7 @@
 package com.consultorioSnoopy.consultorioOnline.Controller;
 
 import com.consultorioSnoopy.consultorioOnline.Service.PacienteService;
+import com.consultorioSnoopy.consultorioOnline.entidades.Doctor;
 import com.consultorioSnoopy.consultorioOnline.entidades.Paciente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,10 +38,6 @@ public class PacienteController {
     private PacienteService pService;
     
     
-    @GetMapping("/")
-    public String cargarIndex(){
-        return "index";
-    }
     
     @GetMapping("/pacientes")
     public String listaPacientes(Model model, @RequestParam(value="criterio", required=false) String criterio ){

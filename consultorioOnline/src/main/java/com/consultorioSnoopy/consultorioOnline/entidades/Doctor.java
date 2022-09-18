@@ -46,6 +46,9 @@ public class Doctor {
         this.numeroDocumento = numeroDocumento;
         this.clave = clave;
         this.telefono = telefono;
+        if (id>0){
+            habilitado=true;
+        }
     }
 
     public Doctor(String nombreCompleto, String tipoDocumento, int numeroDocumento, String clave, int telefono) {

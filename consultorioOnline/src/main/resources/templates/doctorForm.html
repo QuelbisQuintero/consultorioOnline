@@ -14,9 +14,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
          <h1 class="text-center" >Informacion del Doctor</h1>
         <form class="form-group col-sm-auto" action="/doctores" th:object="${doctor}" method="post">
             <div> 
-                <!--label for="id">Id:</label-->
                 <input th:if="${doctor.id}" type="hidden" th:field="*{id}" id="id" name="id">
-                <!--input th:unless="${doctor.id}" type="text" th:field="*{id}" id="id" name="id"-->
             </div>
             <div> 
                 <label for="nombre" >Nombre:</label>
@@ -37,7 +35,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div th:if="${doctor.id}" hidden> 
                 <label for="clave">Clave:</label>
                 <input class="form-control" type="text" th:field="*{clave}" id="clave" name="clave">
-                <input class="form-control" type="text" th:field="*{habilitado}" id="habilitado" name="habilitado">
             </div>
             <div th:unless="${doctor.id}"> 
                 <label for="clave">Clave:</label>
