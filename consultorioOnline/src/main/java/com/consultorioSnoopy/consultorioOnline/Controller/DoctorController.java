@@ -81,6 +81,7 @@ public class DoctorController {
         
         @PostMapping("/doctores")
         public String guardarPaciente(@ModelAttribute Doctor d){
+            d.setHabilitado(true);
             dService.crearEditarDoctor(d);
             return "redirect:/doctores";
         }
